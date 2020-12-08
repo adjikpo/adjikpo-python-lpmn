@@ -12,7 +12,11 @@ def sub(x,y):
     return  x-y
 
 def div(x,y):
-    return x/y
+    try:
+        return x/y
+    except ZeroDivisionError:
+        print("Impossible to do a zero division")
+
 
 def allResOfOperations(x,y):
     resAdd = add(x,y)
