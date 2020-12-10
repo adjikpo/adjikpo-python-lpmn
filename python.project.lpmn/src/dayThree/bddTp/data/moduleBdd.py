@@ -117,7 +117,8 @@ def getAllStudents():
    allStudents = cursor.fetchall()
    allStudents = filter(None, allStudents)
    for i in allStudents:
-      print(i[4] + ' : ' + i[1] + ' ' + i[2] + ' ' + str(i[3]) + 'yrs')   
+   
+      print(i[1] + ' ' + i[2] + ' ' + str(i[3]) + 'yrs')   
 
 def getOneStudent(name,age):
    #Retrieving data
@@ -253,7 +254,7 @@ def deleteOneCurriculum(name):
 
 def deleteOneLanguage(name):
    idLanguage = getIdLanguage(name)
-   delete_language = (idLanguage)
+   delete_language = (idLanguage,)
    #Deleting records
    cursor.execute('''DELETE FROM LANGUAGE WHERE idLanguage=?''', delete_language)
 

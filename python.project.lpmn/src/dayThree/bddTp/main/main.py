@@ -267,6 +267,7 @@ def get_menu_choice():
                 print('\nDeleting a language ....\n')
                 try:
                     language = str(input('Enter the language name:\n'))
+        
                     deleteOneLanguage(language)
                 except ValueError as e:
                     print(e)
