@@ -276,7 +276,51 @@ def get_menu_choice():
                 os.system('clear')
                 break
             
-            loop = True  
+            loop = True
+        elif choice == '14':
+            choice = ''
+            while len(choice) == 0:
+                os.system('clear')
+
+                print('List of curriculums :')
+                getAllCurriculums()
+                
+                curriculum = str(input('\nChoose a curriculum :\n'))
+                getStudentsOneCurriculum(curriculum)
+               
+                
+                break
+            
+            loop = True
+        elif choice == '15':
+            choice = ''
+            while len(choice) == 0:
+                os.system('clear')
+
+                print('List of curriculums :')
+                getAllCurriculums()
+                
+                curriculum = str(input('\nChoose a curriculum :\n'))
+                getLanguagesOneCurriculum(curriculum)
+
+                
+                break
+            
+            loop = True
+        elif choice == '16':
+            choice = ''
+            while len(choice) == 0:
+                os.system('clear')
+                
+                print('List of languages :')
+                getAllLanguages()
+                
+                language = str(input('\nChoose a language :\n'))
+                getCurriculumOneLanguage(language)
+                
+                break
+            
+            loop = True       
         elif choice == '-1':
             choice = ''
             while len(choice) == 0:

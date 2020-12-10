@@ -143,6 +143,16 @@ def getOneCurriculum(name):
    #Fetching a row from the table
    print(cursor.fetchone())
 
+def getOneCurriculumById(id):
+   #Retrieving data
+   curriculum=(id,)
+   cursor.execute('''SELECT * FROM CURRICULUM WHERE idCurriculum=? ''',curriculum)
+
+   #Fetching a row from the table
+   curriculum = cursor.fetchone()
+   print(curriculum)
+
+
 def getAllLanguages():
    cursor.execute('''SELECT * FROM LANGUAGE ''')
 
@@ -165,7 +175,10 @@ def getOneLanguageById(id):
    cursor.execute('''SELECT * FROM LANGUAGE WHERE idLanguage=? ''',language)
 
    #Fetching a row from the table
-   print(cursor.fetchone())
+   language = cursor.fetchone()
+   print(language)
+   # for x in language:
+   #    print(x[1])
 
 def getIdLanguage(name):
    language=(name,)
@@ -252,49 +265,60 @@ def deleteOneLanguage(name):
 ######################## ANOTHER FUNCTIONS ######################################
 
 def getStudentsOneCurriculum(name):
-   studentsOneCurriculum = (name,)
-   cursor.execute('''SELECT * FROM CURRICULUM WHERE nameCurriculum=?''',studentsOneCurriculum)
+   idCurriculum=getIdCurriculum(name)
+   studentsOneCurriculum = (idCurriculum,)
+   cursor.execute('''SELECT * FROM STUDENT WHERE idCurriculum=?''',studentsOneCurriculum)
 
    #Fetching all row from the table
-   print(cursor.fetchall())
+   allStudents = cursor.fetchall()
+   for i in allStudents:
+      print(str(i[0]) + ' - ' + i[1] + ' ' + i[2])
 
 def getLanguagesOneCurriculum(nameCurriculum):
-   nameCurriculum = (nameCurriculum,)
-   cursor.execute('''SELECT * FROM CURRICULUM WHERE nameCurriculum=?''',nameCurriculum)
+   idCurriculum = getIdCurriculum(nameCurriculum)
+   nameCurriculum = (idCurriculum,)
+   cursor.execute('''SELECT * FROM CURRICULUM_LANGUAGE WHERE idCurriculum=?''',nameCurriculum)
 
    languagesId = cursor.fetchall()
-   languaguesName = []
-   for i in languagesId :
-      languaguesName.append[getOneLanguageById(i)]
 
-   print('All languages on {} curriculum: \n'.format(nameCurriculum))
-   print(languaguesName)
+   for i in languagesId :
+      getOneLanguageById(i[1])
+
+def getCurriculumOneLanguage(nameLanguages):
+   idLanguage = getIdLanguage(nameLanguages)
+   nameLanguages = (idLanguage,)
+   cursor.execute('''SELECT * FROM CURRICULUM_LANGUAGE WHERE idLanguage=?''',nameLanguages)
+
+   curriculumId = cursor.fetchall()
+
+   for i in curriculumId :
+      getOneCurriculumById(i[1])
 
 ####################### FIXTURES #######################################
 
 def installFixtures():
 
-   new_student1 = (cursor.lastrowid, "Arthur", "Djikpo", 24,"Devops")
+   new_student1 = (cursor.lastrowid, "Arthur", "Djikpo", 24, 0)
    cursor.execute('INSERT INTO STUDENT VALUES(?, ?, ?, ?, ?)', new_student1)
 
-   new_student2 = (cursor.lastrowid, "Ettiènne", "Thunder", 69, "Devops")
+   new_student2 = (cursor.lastrowid, "Ettiènne", "Thunder", 69, 0)
    cursor.execute('INSERT INTO STUDENT VALUES(?, ?, ?, ?, ?)', new_student2)
 
-   new_student3 = (cursor.lastrowid, "azerty", "test", 24, "Dev Mobile")
+   new_student3 = (cursor.lastrowid, "azerty", "test", 24, 2)
    cursor.execute('INSERT INTO STUDENT VALUES(?, ?, ?, ?, ?)', new_student3)
 
-   new_student4 = (cursor.lastrowid, "qsdfg", "test2", 69, "Dev Python")
+   new_student4 = (cursor.lastrowid, "qsdfg", "test2", 69, 1)
    cursor.execute('INSERT INTO STUDENT VALUES(?, ?, ?, ?, ?)', new_student4)
 
    print('Students fixtures : ok ...... ')
 
-   curriculum1 = (cursor.lastrowid, "Devops")
+   curriculum1 = (0, "Devops")
    cursor.execute('INSERT INTO CURRICULUM VALUES(?, ?)', curriculum1)
 
-   curriculum2 = (cursor.lastrowid, "Dev Mobile")
+   curriculum2 = (1, "Dev Mobile")
    cursor.execute('INSERT INTO CURRICULUM VALUES(?, ?)', curriculum2)
 
-   curriculum3 = (cursor.lastrowid, "Dev Python")
+   curriculum3 = (2, "Dev Python")
    cursor.execute('INSERT INTO CURRICULUM VALUES(?, ?)', curriculum3)
 
    print('Curriculum fixtures : ok ...... ')
