@@ -35,7 +35,7 @@ services:
     ports:
       - 30031:8000
     volumes:
-      - ./src:/var/www/python.project.web
+      - ~/python.project.lpmn/src:/var/www/python.project.web
     depends_on:
       - lpmn-postgres
 
