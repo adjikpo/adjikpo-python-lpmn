@@ -32,3 +32,10 @@ class ListePersonnes:
                     return True
                 else:
                     return False
+
+    def edit_personne(self, nom:str, newnom:str):
+        if len(nom) == 0:
+            return 0
+        else:
+            for personne in self._personnes:
+                personne
