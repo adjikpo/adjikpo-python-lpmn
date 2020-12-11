@@ -17,16 +17,18 @@ class ListePersonnes:
         if len(s) == 0:
             return 0
         else:
-            if s in self._personnes:
-                return self._personnes.__getattribute__(s)
-            else:
-                return 0
+            for personne in self._personnes:
+                if personne.nom == s:
+                    return self._personnes.__getattribute__(s)
+                else:
+                    return 0
 
     def exists_code(self, cp:str):
         if len(cp) == 0:
             return 0
         else:
-            if cp in self._personnes:
-                return True
-            else:
-                return False
+            for personne in self._personnes:
+                if personne.address == cp:
+                    return True
+                else:
+                    return False
